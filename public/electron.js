@@ -26,6 +26,7 @@ function createWindow() {
 
     const options = { extraHeaders: 'pragma: no-cache\n' }
     mainWindow.loadURL('https://127.0.0.1:6363/', options)
+    mainWindow.setMenu(null)
     //mainWindow.loadURL(isDev ? 'http://localhost:3005' : `file://${path.join(__dirname, '../build/index.html')}`);
 
     if (isDev) {
