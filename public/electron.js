@@ -24,7 +24,7 @@ function createWindow() {
     app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
 
     const options = { extraHeaders: 'pragma: no-cache\n' }
-    mainWindow.loadURL('http://localhost:3005', options)
+    mainWindow.loadURL('https://127.0.0.1:6363/', options)
     //mainWindow.loadURL(isDev ? 'http://localhost:3005' : `file://${path.join(__dirname, '../build/index.html')}`);
 
     if (isDev) {
