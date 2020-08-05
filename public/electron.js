@@ -1,9 +1,9 @@
 const electron = require('electron');
+const path = require('path')
 
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
-const path = require('path');
 const isDev = require('electron-is-dev');
 
 let mainWindow;
@@ -18,7 +18,8 @@ function createWindow() {
             webSecurity: false,
             allowDisplayingInsecureContent: true,
             allowRunningInsecureContent: true
-        }
+        },
+        icon: path.join(__dirname, 'assets/icons/favicon.png')
     });
 
     app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
