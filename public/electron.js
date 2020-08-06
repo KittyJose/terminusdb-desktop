@@ -25,40 +25,23 @@ function createWindow() {
     app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
 
     const options = { extraHeaders: 'pragma: no-cache\n' }
-    mainWindow.loadURL('https://127.0.0.1:6363/', options)
+    mainWindow.loadURL('https://127.0.0.1:6363/')
     mainWindow.setMenu(null)
-    //mainWindow.loadURL(isDev ? 'http://localhost:3005' : `file://${path.join(__dirname, '../build/index.html')}`);
+    mainWindow.loadURL(isDev ? 'http://localhost:3005' : `file://${path.join(__dirname, '../build/index.html')}`);
 
     if (isDev) {
         // Open the DevTools.
-        //BrowserWindow.addDevToolsExtension('<location to your react chrome extension>');
         mainWindow.webContents.openDevTools();
+
         app.on('certificate-error', (event, webContents, url, error, certificate, callback) => {
             //console.log(' certificate error url', url)
             callback(true)
-            mainWindow.webContents.openDevTools();
-
+            //mainWindow.webContents.openDevTools();
             mainWindow.webContents.on("devtools-opened", () => { mainWindow.webContents.closeDevTools(); });
         })
     }
-    mainWindow.on('closed', () => {
-        mainWindow = null
-    });
 }
 
 app.on('ready', () => {
     createWindow()
 })
-
-app.on('window-all-closed', (url) => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
-
-
-app.on('activate', (url) => {
-    if (mainWindow === null) {
-        createWindow();
-    }
-});
