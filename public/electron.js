@@ -51,7 +51,6 @@ function createWindow() {
                 event.preventDefault();
                 mainWindow.hide();
             }
-
             return false;
         });
 
@@ -79,20 +78,22 @@ app.on('ready', () => {
     tray.on('click', tray.popUpContextMenu);
   }
 
-  updateMenu();
-
+  createMenu();
   tray.setToolTip('TerminusDB');
+  createWindow();
 });
 
-const updateMenu = () => {
+const createMenu = () => {
   const menu = Menu.buildFromTemplate([
     ...clippings.map((clipping, index) => ({ label: clipping, click() {
-        createWindow();
+        mainWindow.show();
       }})),
     { type: 'separator' },
     {
       label: 'Quit',
-      click() { app.quit(); },
+      click() {
+        app.isQuiting = true;
+        app.quit(); },
     }
   ]);
 
