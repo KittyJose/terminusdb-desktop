@@ -37,7 +37,7 @@ function createWindow() {
 
     if (isDev) {
         // Open the DevTools.
-        mainWindow.webContents.openDevTools();
+        //mainWindow.webContents.openDevTools();
 
 
         mainWindow.on('minimize',function(event){
