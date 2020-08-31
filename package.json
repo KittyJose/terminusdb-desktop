@@ -4,9 +4,13 @@
   "private": true,
   "main": "public/electron.js",
   "scripts": {
-    "electron-dev":"electron ."
+    "electron-dev": "electron --no-sandbox ."
   },
   "devDependencies": {
-    "electron": "^9.1.2"
+    "electron": "^9.1.2",
+    "electron-packager": "^15.1.0"
+  },
+  "dependencies": {
+    "electron-is-dev": "^1.2.0"
   }
 }

@@ -1,5 +1,6 @@
 const electron = require('electron');
 const path = require('path')
+const fs = require('fs')
 
 const app = electron.app;
 const Menu = electron.Menu;
@@ -9,9 +10,23 @@ const BrowserWindow = electron.BrowserWindow;
 
 const isDev = require('electron-is-dev');
 
+const appDir = path.dirname(require.main.filename);
+const spawn = require('child_process').spawn;
+
+
 let mainWindow;
 let tray = null;
 const clippings = ['TerminusDB'];
+
+function startTerminusDB(callback) {
+    const appImagePath = `${appDir}/TerminusDB.AppImage`
+    if (fs.existsSync(appImagePath)) {
+        spawn(appImagePath, ['serve'], {
+            detached: true
+        })
+    }
+}
+
 
 function createWindow() {
     mainWindow = new BrowserWindow({
@@ -30,7 +45,11 @@ function createWindow() {
 
 
     const options = { extraHeaders: 'pragma: no-cache\n' }
-    mainWindow.loadURL('https://127.0.0.1:6363/')
+    startTerminusDB();
+    setTimeout(() => {
+        mainWindow.loadURL('https://127.0.0.1:6363/')
+    }, 3000);
+    console.log("Terminusdb started");
     mainWindow.setMenu(null)
 
     //mainWindow.loadURL(isDev ? 'http://localhost:3005' : `file://${path.join(__dirname, '../build/index.html')}`);
@@ -56,15 +75,13 @@ function createWindow() {
 
     }
 }
-/*
-app.on('ready', () => {
-    createWindow()
-})*/
-app.commandLine.appendSwitch('ignore-certificate-errors', 'true');
-
 app.on('certificate-error', (event, webContents, url, error, certificate, callback) => {
-    //console.log(' certificate error url', url)
-    callback(true)
+    if (url.startsWith('https://127.0.0.1')) {
+        callback(true)
+    }
+    else {
+        callback(false)
+    }
     //mainWindow.webContents.openDevTools();
     mainWindow.webContents.on("devtools-opened", () => { mainWindow.webContents.closeDevTools(); });
 })
@@ -73,10 +90,10 @@ app.on('ready', () => {
   if (app.dock) app.dock.hide();
 
   tray = new Tray(path.join(__dirname, 'assets/icons/favicon.png'));
-
   if (process.platform === 'win32') {
     tray.on('click', tray.popUpContextMenu);
   }
+
 
   createMenu();
   tray.setToolTip('TerminusDB');
