@@ -11,7 +11,7 @@ const BrowserWindow = electron.BrowserWindow;
 const isDev = require('electron-is-dev');
 
 const appDir = path.dirname(require.main.filename);
-const spawn = require('child_process').execFile;
+const execFile = require('child_process').execFile;
 
 
 let mainWindow;
@@ -22,8 +22,10 @@ function startTerminusDB(callback) {
     const appImagePath = `${appDir}/TerminusDB.AppImage`
     console.log(appImagePath)
     if (fs.existsSync(appImagePath)) {
-        spawn(appImagePath, ['serve'], {
-            detached: true
+        execFile(appImagePath, ['serve'], (error, stdout, stderr) => {
+            console.log(error)
+            console.log(stdout)
+            console.log(stderr)
         })
     }
 }
