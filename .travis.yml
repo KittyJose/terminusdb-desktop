@@ -1,0 +1,13 @@
+language: node_js
+sudo: required
+node_js:
+  - lts/*
+
+stages:
+  - name: build
+
+jobs:
+  include:
+    - stage: build
+      script:
+        - npm run build
