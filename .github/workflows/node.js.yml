@@ -41,7 +41,7 @@ jobs:
         curl -L 'https://dcm.ist/windows-bin-server' > temp.tar.gz
         mkdir public/windows
         cd public/windows
-        tar xf ../../temp.zip
+        tar xf ../../temp.tar.gz
         ls
         cd ../../
       shell: bash
