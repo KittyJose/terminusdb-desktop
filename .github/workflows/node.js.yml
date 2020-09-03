@@ -23,7 +23,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: curl -L 'https://dcm.ist/linux-bin' > public/TerminusDB.AppImage && chmod +x public/TerminusDB.AppImage
+    - run: curl -L 'https://dcm.ist/linux-bin-server' > public/TerminusDB.AppImage && chmod +x public/TerminusDB.AppImage
     - run: npx electron-builder build --linux appimage -p never
 
     - name: Upload a Build Artifact
@@ -31,25 +31,3 @@ jobs:
       with:
         name: terminusdb-desktop.AppImage
         path: dist/terminusdb-desktop-0.1.0.AppImage
-        
-    - name: Create a Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: dev
-        release_name: dev
-        prerelease: true
-        
-    - name: Upload a Release Asset
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-    # The URL for uploading assets to the release
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-      # The path to the asset you want to upload
-        asset_path: dist/terminusdb-desktop-0.1.0.AppImage
-    # The name of the asset you want to upload
-        asset_name: TerminusDB-desktop.AppImage
