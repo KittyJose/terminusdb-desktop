@@ -8,8 +8,7 @@ on:
     branches: [ dev, master ]
 
 jobs:
-  build:
-
+  build_linux:
     runs-on: ubuntu-latest
 
     strategy:
@@ -31,3 +30,25 @@ jobs:
       with:
         name: terminusdb-desktop.AppImage
         path: dist/terminusdb-desktop-0.1.0.AppImage
+
+  build_windows:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm install
+    - run: |
+        curl -L 'https://dcm.ist/windows-bin-server' > temp.zip
+        mkdir public/windows
+        cd public/windows
+        unzip ../../temp.zip
+        ls
+        cd ../../
+      shell: bash
+    - run: npx electron-builder build -p never
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.1.4
+      with:
+        name: "terminusdb-desktop 0.1.0.exe"
+        path: "dist/terminusdb-desktop 0.1.0.exe"
