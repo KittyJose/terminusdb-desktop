@@ -20,9 +20,16 @@ const clippings = ['TerminusDB'];
 
 function startTerminusDB(callback) {
     const appImagePath = `${appDir}/TerminusDB.AppImage`
-    console.log(appImagePath)
+    const exePath = `${appDir}/windows/start_windows.bat`
     if (fs.existsSync(appImagePath)) {
         execFile(appImagePath, ['serve'], (error, stdout, stderr) => {
+            console.log(error)
+            console.log(stdout)
+            console.log(stderr)
+        })
+    }
+    else if (fs.existsSync(exePath)) {
+        execFile(exePath, [], (error, stdout, stderr) => {
             console.log(error)
             console.log(stdout)
             console.log(stderr)
@@ -48,7 +55,7 @@ function createWindow() {
     startTerminusDB();
     setTimeout(() => {
         mainWindow.loadURL('https://127.0.0.1:6363/')
-    }, 3000);
+    }, 8000);
     console.log("Terminusdb started");
     mainWindow.setMenu(null)
 
