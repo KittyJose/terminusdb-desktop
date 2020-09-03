@@ -31,4 +31,10 @@ jobs:
       with:
         name: terminusdb-desktop.AppImage
         path: dist/terminusdb-desktop-0.1.0.AppImage
-      # The desired behavior if no files are found using the provided path.
+        
+    - name: Create a Release
+      uses: actions/create-release@v1
+      with:
+        tag_name: dev
+        release_name: dev
+        prerelease: true
