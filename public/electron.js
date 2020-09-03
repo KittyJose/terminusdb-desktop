@@ -30,7 +30,6 @@ function startTerminusDB(callback) {
     }
 }
 
-
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 900,
@@ -44,8 +43,6 @@ function createWindow() {
         },
         icon: path.join(__dirname, 'assets/icons/favicon.png')
     });
-
-
 
     const options = { extraHeaders: 'pragma: no-cache\n' }
     startTerminusDB();
@@ -75,9 +72,12 @@ function createWindow() {
             }
             return false;
         });
-
     }
+
+    electron.globalShortcut.register('f5', () => mainWindow.reload())
+    electron.globalShortcut.register('CommandOrControl+R', () => mainWindow.reload())
 }
+
 app.on('certificate-error', (event, webContents, url, error, certificate, callback) => {
     if (url.startsWith('https://127.0.0.1')) {
         callback(true)
