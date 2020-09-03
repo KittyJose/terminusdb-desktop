@@ -53,13 +53,30 @@ jobs:
         name: "terminusdb-desktop Setup 0.1.0.exe"
         path: "dist/terminusdb-desktop Setup 0.1.0.exe"
 
+  deploy:
+    runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
     - name: Delete tag and release
       uses: dev-drprasad/delete-tag-and-release@v0.1.2
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: dev-tag-release
+        
+   
+    - uses: actions/download-artifact@v2
+      with:
+        name: terminusdb-desktop.AppImage
+        
+      
+    - uses: actions/download-artifact@v2
+      with:
+        name: "terminusdb-desktop Setup 0.1.0.exe"
 
     - name: Create a Release
       id: create_release
@@ -69,3 +86,6 @@ jobs:
       with:
         tag_name: dev-tag-release
         prerelease: true
+        files: |
+          "terminusdb-desktop Setup 0.1.0.exe"
+          terminusdb-desktop.AppImage
