@@ -55,6 +55,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    needs: [build_windows, build_linux]
 
     steps:
     - name: Delete tag and release
