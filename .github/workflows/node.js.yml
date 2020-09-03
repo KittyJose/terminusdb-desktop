@@ -82,5 +82,5 @@ jobs:
         tag_name: dev-tag-release
         prerelease: true
         files: |
-          terminusdb-desktop Setup 0.1.0.exe
           terminusdb-desktop.AppImage
+          terminusdb-desktop Setup 0.1.0.exe
