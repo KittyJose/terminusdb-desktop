@@ -24,7 +24,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: curl 'https://dcm.ist/linux-bin' > public/TerminusDB.AppImage && chmod +x public/TerminusDB.AppImage
-    - run: npx electron-builder build
+    - run: npx electron-builder build --linux appimage
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.1.4
