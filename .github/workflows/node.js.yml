@@ -50,5 +50,5 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.1.4
       with:
-        name: "terminusdb-desktop 0.1.0.exe"
-        path: "dist/terminusdb-desktop 0.1.0.exe"
+        name: "terminusdb-desktop Setup 0.1.0.exe"
+        path: "dist/terminusdb-desktop Setup 0.1.0.exe"
