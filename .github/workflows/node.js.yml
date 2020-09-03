@@ -38,10 +38,10 @@ jobs:
     - uses: actions/checkout@v2
     - run: npm install
     - run: |
-        curl -L 'https://dcm.ist/windows-bin-server' > temp.zip
+        curl -L 'https://dcm.ist/windows-bin-server' > temp.tar.gz
         mkdir public/windows
         cd public/windows
-        unzip ../../temp.zip
+        tar xf ../../temp.zip
         ls
         cd ../../
       shell: bash
