@@ -73,13 +73,15 @@ jobs:
       with:
         name: "terminusdb-desktop Setup 0.1.0.exe"
 
+    - run: ls
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        tag_name: dev-tag
+        tag_name: dev-tag-release
         release_name: dev
         body: 'dev ci'
         draft: false
