@@ -29,7 +29,7 @@ jobs:
       uses: actions/upload-artifact@v2.1.4
       with:
         name: terminusdb-desktop.AppImage
-        path: dist/terminusdb-desktop-0.1.0.AppImage
+        path: dist/terminusdb-desktop-3.0.0.AppImage
 
   build_windows:
     runs-on: windows-latest
@@ -49,8 +49,8 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.1.4
       with:
-        name: "terminusdb-desktop Setup 0.1.0.exe"
-        path: "dist/terminusdb-desktop Setup 0.1.0.exe"
+        name: "terminusdb-desktop Setup 3.0.0.exe"
+        path: "dist/terminusdb-desktop Setup 3.0.0.exe"
 
   deploy:
     runs-on: ubuntu-latest
@@ -70,7 +70,7 @@ jobs:
 
     - uses: actions/download-artifact@v2
       with:
-        name: "terminusdb-desktop Setup 0.1.0.exe"
+        name: "terminusdb-desktop Setup 3.0.0.exe"
 
     - name: Create a Release
       id: create_release
@@ -81,5 +81,5 @@ jobs:
         tag_name: dev-tag-release
         prerelease: true
         files: |
-          terminusdb-desktop-0.1.0.AppImage
-          terminusdb-desktop Setup 0.1.0.exe
+          terminusdb-desktop-3.0.0.AppImage
+          terminusdb-desktop Setup 3.0.0.exe
