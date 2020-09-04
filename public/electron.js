@@ -46,6 +46,13 @@ function createWindow () {
 
   electron.globalShortcut.register('f5', () => mainWindow.reload())
   electron.globalShortcut.register('CommandOrControl+R', () => mainWindow.reload())
+  electron.globalShortcut.register('Alt+Left', () => {
+    if (mainWindow.webContents.canGoBack()) mainWindow.webContents.goBack()
+  })
+  electron.globalShortcut.register('Alt+Right', () => {
+    if (mainWindow.webContents.canGoForward()) mainWindow.webContents.goForward()
+  })
+  
 
   console.log('ready')
   mainWindow.loadURL('https://127.0.0.1:6363/')
