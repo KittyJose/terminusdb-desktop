@@ -19,7 +19,8 @@
             "category": "your.app.category.type"
 	},
         "win": {
-            "asar": false
+            "asar": false,
+            "icon": "public/favicon.ico"
         }
     }
 }
