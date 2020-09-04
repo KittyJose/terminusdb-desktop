@@ -59,10 +59,10 @@ jobs:
 
 
     steps:
-     - name: Extract branch name
-       shell: bash
-       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-       id: extract_branch
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
 
     - name: Delete tag and release
       uses: dev-drprasad/delete-tag-and-release@v0.1.2
