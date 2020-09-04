@@ -44,6 +44,11 @@ function createWindow () {
     })
   }
 
+  mainWindow.webContents.on('new-window', function (e, url) {
+    e.preventDefault()
+    electron.shell.openExternal(url)
+  })
+
   electron.globalShortcut.register('f5', () => mainWindow.reload())
   electron.globalShortcut.register('CommandOrControl+R', () => mainWindow.reload())
   electron.globalShortcut.register('Alt+Left', () => {
