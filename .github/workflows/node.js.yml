@@ -42,7 +42,6 @@ jobs:
         mkdir public/windows
         cd public/windows
         tar xf ../../temp.tar.gz
-        ls
         cd ../../
       shell: bash
     - run: npx electron-builder build -p never
